@@ -14,10 +14,10 @@ public class Test {
      */
     public static void main(String[] args) {
         String stored = "Payday 2";
-        String input = "padyay 2";
+        String input  = "paday2";
         
         boolean isSimilar = SimilarityChecker.compareStrings(input,
-                stored, 62);
+                stored, 62.5);
         
         System.out.println(isSimilar);
         

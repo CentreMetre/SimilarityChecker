@@ -3,7 +3,7 @@
  * The comparison is as percentage.
  * It compares each char in the strings
  * and if they are the same the score rises.
- * @version 0.1
+ * @version 1.0
  * @since 0.1
  * @author CentreMetre
  */
@@ -17,12 +17,12 @@ public class SimilarityChecker {
     /**
      * How similar the two strings are as a percentage.
      */
-    private static float similarityScore = 0;
+    private static double similarityScore = 0;
     
     /**
      * Default of 85%
      */
-    private static float minScore = 85;
+    private static double minScore = 85;
     
     /**
      * The string that is inputted.
@@ -38,7 +38,7 @@ public class SimilarityChecker {
     /**
      * Holds the value that each character is worth as a percentage.
      */
-    private static float charPercentage = 0;
+    private static double charPercentage = 0;
     
     /**
      * The main method to check two strings. What will be called by a dev.
@@ -52,7 +52,7 @@ public class SimilarityChecker {
      */
     static boolean compareStrings(String input,
             String first,
-            float... minScoreVarArgs)
+            double... minScoreVarArgs)
     {
         resetVariables();
         
@@ -162,6 +162,7 @@ public class SimilarityChecker {
      */
     private static void setCharPercentage()
     {
-        charPercentage = 100/inputString.length();
+        //double cast is needed so there is no loss in decimals
+        charPercentage = (double) 100.0/inputString.length();
     }
 }
