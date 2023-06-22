@@ -16,17 +16,8 @@ public class Test {
         String stored = "Payday 2";
         String input  = "paday2";
         
-        boolean isSimilar = SimilarityChecker.compareStrings(input,
-                stored, 62.5);
         
-        System.out.println(isSimilar);
-        
-        if (isSimilar)
-        {
-            System.out.println("You inputted " + input +
-                    " did you mean " + stored);
-        }
-        
+        System.out.println(System.getProperty("user.home"));
     }
     
 }

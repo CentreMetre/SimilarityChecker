@@ -1,9 +1,12 @@
+
+import java.util.ArrayList;
+
 /**
  * Compares to strings to see if they're similar.
  * The comparison is as percentage.
  * It compares each char in the strings
  * and if they are the same the score rises.
- * @version 1.0
+ * @version 2.0
  * @since 0.1
  * @author CentreMetre
  */
@@ -25,6 +28,16 @@ public class SimilarityChecker {
     private static double minScore = 85;
     
     /**
+     * Stores if the user wants to check for strict capitalisation
+     */
+    private static boolean doCheckStrictCapitalisation = false;
+    
+    /**
+     * Stores if the user wants to check adjacent characters
+     */
+    private static boolean doCheckAdjacentCharacters = false;
+    
+    /**
      * The string that is inputted.
      * and to be compared against the already stored string
      */
@@ -34,6 +47,16 @@ public class SimilarityChecker {
      * The string that already existed and is being compared against
      */
     private static String storedString = null;
+    
+    /**
+     * The string array list of inputString
+     */
+    static ArrayList<Character> inputStringArray = new ArrayList<Character>();
+    
+    /**
+     * The string array list of storedString
+     */
+    static ArrayList<Character> storedStringArray = new ArrayList<Character>();
     
     /**
      * Holds the value that each character is worth as a percentage.
@@ -50,8 +73,10 @@ public class SimilarityChecker {
      * will use index 0 of the array.
      * @return True if the score is higher than or equal to the minimum score.
      */
-    static boolean compareStrings(String input,
+    static boolean compareStirngs(String input,
             String first,
+            boolean checkForStrictCapitalisation,
+            boolean checkForAdjacentCharacters,
             double... minScoreVarArgs)
     {
         resetVariables();
@@ -65,6 +90,9 @@ public class SimilarityChecker {
             return true;
         }
         
+        doCheckStrictCapitalisation = checkForStrictCapitalisation;
+        doCheckAdjacentCharacters = checkForAdjacentCharacters;
+        
         /*
         Checks if there is a custom min score needed to trigger a similarity.
         */
@@ -77,6 +105,11 @@ public class SimilarityChecker {
         inputString = input;
         
         setCharPercentage();
+        
+        if (doCheckStrictCapitalisation)
+        {
+            
+        }
         
         compareStringArrays();
         
@@ -108,11 +141,34 @@ public class SimilarityChecker {
         
     }
     
-    private static void compareStringArrays()
+    /**
+     * Rests similarityScore and minScore so the class can be used again.
+     */
+    private static void resetVariables()
     {
-        char[] inputChars = inputString.toCharArray();
-        char[] storedChars = storedString.toCharArray();
+        similarityScore = 0;
+        minScore = MIN_SCORE_DEFAULT;
+                
+        inputString = null;
+        storedString = null;
         
+        inputStringArray.clear();
+        storedStringArray.clear();
+        
+        doCheckStrictCapitalisation = false;
+        doCheckAdjacentCharacters = false;
+    }
+    
+    private static void decapitaliseWords()
+    {
+            
+    }
+    
+    /**
+     * Compares the strings, adding charPercentage to similartyScore
+     */
+    private static void compareStringArrays()
+    {   
         /*
         If the inputted string is shorter than the length of the already
         stored one there doesnt need to be a check for that becuase score
@@ -129,10 +185,16 @@ public class SimilarityChecker {
         {
             try
             {
+                //add check for individiual words aswell
                 if (inputChars[i] == storedChars[i])
                 {
                     similarityScore = similarityScore + charPercentage;
                 }
+                else if (doCheckAdjacentCharacters)
+                {
+                    //if ()
+                }
+                
             }
             catch (Exception e)
             {
@@ -142,16 +204,9 @@ public class SimilarityChecker {
         }
     }
     
-    /**
-     * Rests similarityScore and minScore so the class can be used again.
-     */
-    private static void resetVariables()
+    private static boolean checkAdjacentCharacters()
     {
-        similarityScore = 0;
-        minScore = MIN_SCORE_DEFAULT;
         
-        inputString = null;
-        storedString = null;
     }
     
     /**
